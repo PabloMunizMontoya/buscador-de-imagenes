@@ -12,7 +12,7 @@ const ListadoImagenes = ({resultados}) => {
             ))}
         </div>
 
-     );
+    );
 }
- 
+
 export default ListadoImagenes;
