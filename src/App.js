@@ -8,6 +8,8 @@ function App() {
 
   const [busqueda,guardarBusqueda] = useState('')
   const [resultados, guardarResultados] = useState([])
+  const [paginaActual, guardarPaginaActual] = useState(1)
+  const [ totalPaginas, guardarTotalPaginas] = useState(1)
 
   useEffect(() => {
     const consultarApi = async () => {
@@ -21,6 +23,9 @@ function App() {
     const resultado = await respuesta.json()
 
     guardarResultados(resultado.hits)
+
+    const calcularTotalPaginas = Math.ceil(resultado.totalHits / imagenesPorPagina)
+    guardarTotalPaginas(calcularTotalPaginas)
     }
 
     consultarApi()
