@@ -1,11 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import Formulario from './components/Formulario';
+import ListadoImagenes from './components/ListadoImagenes';
 
 
 
 function App() {
 
   const [busqueda,guardarBusqueda] = useState('')
+  const [resultados, guardarResultados] = useState([])
 
   useEffect(() => {
     const consultarApi = async () => {
@@ -18,7 +20,7 @@ function App() {
     const respuesta = await fetch(url)
     const resultado = await respuesta.json()
 
-    console.log(resultado.hits)
+    guardarResultados(resultado.hits)
     }
 
     consultarApi()
@@ -31,6 +33,11 @@ function App() {
 
         <Formulario 
           guardarBusqueda= {guardarBusqueda}
+        />
+      </div>
+      <div className='row justify-content-center'>
+        <ListadoImagenes
+          resultados = {resultados}
         />
       </div>
     </div>
